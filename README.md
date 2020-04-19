@@ -1,38 +1,36 @@
-# openwrt-package
+基于lean openwrt编译最后一版 开源 passwall
 
-luci-app-passwall停止开发，当然如果存在BUG，欢迎各位大佬PR。
+可以使用ubuntu/debian
 
-[OpenWRT-Actions](https://github.com/Lienol/openwrt-actions/actions)
+sudo apt-get update
+sudo apt-get -y install build-essential asciidoc binutils bzip2 gawk gettext git libncurses5-dev libz-dev patch python3.5 unzip zlib1g-dev lib32gcc1 libc6-dev-i386 subversion flex uglifyjs git-core gcc-multilib p7zip p7zip-full msmtp libssl-dev texinfo libglib2.0-dev xmlto qemu-utils upx libelf-dev autoconf automake libtool autopoint device-tree-compiler g++-multilib antlr3 gperf
 
-请使用[基于官方openwrt源码](https://github.com/Lienol/openwrt) 和 [基于大雕源码](https://github.com/Lienol/openwrt/tree/dev-lean-lede)源码编译
+git clone https://github.com/coolsnowwolf/lede
 
-使用方法：
+cd /lede/package
+git clone https://github.com/keramist/lienol-openwrt-package.git
+cd
+cd lede
 
-添加 src-git lienol https://github.com/Lienol/openwrt-package 到 OpenWRT源码根目录feeds.conf.default文件
-
-使用上面源码请忽略上一步
-
-然后执行
-```bash
-./scripts/feeds clean
-./scripts/feeds update -a
-./scripts/feeds install -a
-```
-或者你可以把该源码手动下载或Git Clone下载放到OpenWRT源码的Package目录里面，然后编译。
-如果你使用的是Luci19，请编译时选上"luci","luci-compat","luci-lib-ipkg"后编译
+./scripts/feeds update -a && ./scripts/feeds install -a
+make menuconfig
+make -j8 download V=s
+make -j20 V=s
 
 
-Some OpenWrt/LEDE LuCI for Commonly Used Package
+二次编译
+cd lede
+git pull
+./scripts/feeds update -a && ./scripts/feeds install -a
+make defconfig
+make -j8 download
+make -j$(($(nproc) + 1)) V=s
 
-Add "src-git lienol https://github.com/Lienol/openwrt-package" to feeds.conf.default.
+重新配置
+rm -rf ./tmp && rm -rf .config
+make menuconfig
+make -j$(($(nproc) + 1)) V=s
 
-```bash
-./scripts/feeds clean
-./scripts/feeds update -a
-./scripts/feeds install -a
-```
-
-Or download it yourself and put it in the package folder.
-make after enjoy...
-
-If you use Luci-19, Please selected the "luci-compat" and "luci-lib-ipkg" before compile
+个人建议删除
+rm -rf lede
+后重新下载配置编译
