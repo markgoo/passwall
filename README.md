@@ -6,7 +6,7 @@ sudo apt-get update
 sudo apt-get -y install build-essential asciidoc binutils bzip2 gawk gettext git libncurses5-dev libz-dev patch python3.5 unzip zlib1g-dev lib32gcc1 libc6-dev-i386 subversion flex uglifyjs git-core gcc-multilib p7zip p7zip-full msmtp libssl-dev texinfo libglib2.0-dev xmlto qemu-utils upx libelf-dev autoconf automake libtool autopoint device-tree-compiler g++-multilib antlr3 gperf
 
 
-git clone https://github.com/Lienol/openwrt.git
+git clone -b dev-lean-lede https://github.com/Lienol/openwrt lean-lede
 
 cd ./lede  
 1 编辑   
@@ -41,5 +41,8 @@ rm -rf lede
 
 passwall 挺好的 ，感谢作者，  
 但是tg 的非passwall官方群就是sb行径，  
-推广机场，用户只要说不好，有问题，只要说机场不好，  
-就直接禁言，祝他们都早日吃上免费饭
+推广机场，无可厚非，  
+但用户说不好，有问题，只要说机场不好，就直接禁言，  
+不知道马甲有千千万？    
+祝他们都早日吃上免费饭。  
+大家不爽的可以去举报。
